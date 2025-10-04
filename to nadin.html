@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to Nadin</title>
+
+    <!-- 1. Mengimpor Font 'Nunito' yang lebih ramah -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-grad-start: #fff0f5; /* Lavender Blush */
+            --bg-grad-end: #ffe6eb;   /* Misty Rose */
+            --card-bg: rgba(255, 255, 255, 0.65); /* Latar belakang kaca */
+            --text-color: #2c2c2c;
+            --yes-btn-grad-start: #1a95c1;
+            --yes-btn-grad-end: #2807c9;
+            --no-btn-grad-start: #ff7a7a;
+            --no-btn-grad-end: #ff5252;
+            --shadow-color: rgba(200, 150, 169, 0.2);
+        }
+
+        /* 2. Latar Belakang Gradasi Halus */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, var(--bg-grad-start), var(--bg-grad-end));
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* 3. Kartu dengan Efek Kaca (Glassmorphism) */
+        .container {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 16px 40px var(--shadow-color);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); /* Untuk Safari */
+            width: 90%;
+            max-width: 420px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.9s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 4. Tampilan dengan Transisi Halus */
+        .screen {
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+        }
+
+        .screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            width: calc(100% - 80px); /* Sesuaikan dengan padding */
+            transform: scale(0.9);
+        }
+
+        /* 5. Konten yang Lebih Menarik */
+        .gif {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.1));
+        }
+
+        h2 {
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--text-color);
+            margin: 0 0 45px 0;
+            animation: textPopIn 1s ease-out forwards;
+        }
+
+        @keyframes textPopIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* 6. Tombol Modern dengan Interaksi */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 55px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px var(--shadow-color);
+            filter: brightness(1.05);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px) scale(0.98);
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+        
+        #yesBtn {
+            background: linear-gradient(45deg, var(--yes-btn-grad-start), var(--yes-btn-grad-end));
+        }
+
+        #noBtn {
+            background: linear-gradient(45deg, var(--no-btn-grad-start), var(--no-btn-grad-end));
+            /* Gerakan mulus ditambahkan di sini */
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* Transisi untuk posisi & style */
+        }
+        
+        /* 7. Loader Hati SVG yang Elegan */
+        #loader {
+            display: flex;
+            justify-content: absolute;
+            align-items: absolute;
+            height: 300px;
+        }
+        
+        .heart-loader {
+            width: 300px;
+            animation: svgPulse 1.2s infinite ease-in-out;
+        }
+
+        @keyframes svgPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        
+        <div class="screen" id="questionScreen">
+            <img class="gif" src="tumblr_mk726dRAip1qcm5b7o1_400_gif (400×400).gif" alt="Asking GIF">
+            <h2>aku ganteng ga?</h2>
+            <div class="button-container">
+                <button class="btn" id="yesBtn">Iya</button>
+                <button class="btn" id="noBtn">Ga</button>
+            </div>
+        </div>
+
+        <div class="screen hidden" id="loaderScreen">
+        
+            
+                <h2>Beneran?</h2>
+              
+              
+            </div>
+      
+
+        <div class="screen hidden" id="resultScreen">
+            <img class="gif" src="Cats Love To Give Kisses Too (10 Gifs).gif" alt="Result GIF">
+            <h2>makasihh! ✨</h2>
+        </div>
+
+    </div>
+
+    <script>
+        const mainContainer = document.getElementById('mainContainer');
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const questionScreen = document.getElementById('questionScreen');
+        const loaderScreen = document.getElementById('loaderScreen');
+        const resultScreen = document.getElementById('resultScreen');
+        
+        let isNoButtonAbsolute = false;
+
+        function moveNoButton() {
+            if (!isNoButtonAbsolute) {
+                noBtn.style.position = 'absolute';
+                isNoButtonAbsolute = true;
+            }
+            
+            const containerRect = mainContainer.getBoundingClientRect();
+            const noBtnRect = noBtn.getBoundingClientRect();
+            
+            const maxX = containerRect.width - noBtnRect.width - 20; // -20 untuk padding
+            const maxY = containerRect.height - noBtnRect.height - 20;
+            
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+        }
+        
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('click', moveNoButton);
+
+        yesBtn.addEventListener('click', () => {
+            questionScreen.classList.add('hidden');
+            
+            setTimeout(() => {
+                loaderScreen.classList.remove('hidden');
+
+                setTimeout(() => {
+                    loaderScreen.classList.add('hidden');
+                    
+                    setTimeout(() => {
+                        resultScreen.classList.remove('hidden');
+                        // Jalankan ulang animasi teks untuk layar hasil
+                        resultScreen.querySelector('h2').style.animation = 'textPopIn 1s ease-out forwards';
+                    }, 600);
+
+                }, 2500); // Durasi loader dikurangi sedikit
+
+            }, 600);
+        });
+    </script>
+
+</body>
+</html>
